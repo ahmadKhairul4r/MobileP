@@ -34,7 +34,7 @@ export default function Dashboard() {
             <div className="font-extrabold text-[48px] mt-10">
               <div>Ahmad Khairul Arifin</div>
               <div>
-                <span className="text-[#FFB400]">Full Stack</span> Developer 
+                <span className="text-[#0284c7]">Full Stack</span> Developer 
               </div>
             </div>
             <p className="text-[#767676]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et, volutpat feugiat placerat lobortis. Natoque rutrum semper sed suspendisse nunc lectus.</p>
