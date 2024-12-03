@@ -5,7 +5,7 @@ import { MongoClient } from 'mongodb'
 const uri = process.env.MONGODB_URI
 const options = {
   useUnifiedTopology: true,
-  useNewUrlParser: true,
+  //useNewUrlParser: true,
 }
 
 let client
@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === 'development') {
   }
   clientPromise = global._mongoClientPromise
 } else {
-  client = new MongoClient(uri)
+  client = new MongoClient(uri, options)
   clientPromise = client.connect()
 }
 
