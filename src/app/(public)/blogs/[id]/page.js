@@ -106,6 +106,7 @@ export default function Blogsbyid(){
 
     useEffect(()=>{
         onFetchBlogs()
+        onFetchKomentar()
     },[])
 
     if(isLoading) return (<>Loading...</>)
