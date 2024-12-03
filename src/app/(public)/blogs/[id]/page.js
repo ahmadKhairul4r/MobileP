@@ -169,14 +169,13 @@ export default function Blogsbyid(){
                 </span>
             </button>
         </Card>
+        
         {
             dataKomentar.map( (komen,idx) => <Card className="mt-5" key={idx} title={komen.nama}>
                 <div  dangerouslySetInnerHTML={{ __html: komen.komentar }} />
             </Card> )
         }
         
-
-        </Card>
 
         <ConfigDialog  
             onOkOny={()=>onCancel()} 
