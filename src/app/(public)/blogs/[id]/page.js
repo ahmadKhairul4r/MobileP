@@ -24,6 +24,8 @@ export default function Blogsbyid(){
         komentar:'',
         blogId: params.id
     });
+    const [isLoadingKomentar, setLoadingKomentar]= useState(false)
+    const [dataKomentar, setDataKomentar] = useState([])
     const clearData = ()=>{
         setDataKomen({
             nama:'',
@@ -50,6 +52,21 @@ export default function Blogsbyid(){
             setLoading(false)
         }
     }
+
+    const onFetchKomentar=async()=>{
+        try{
+            setLoadingKomentar(true)
+            let res = await fetch(`/api/komenblog/${params.id}`)
+            let data = await res.json()
+            setDataKomentar(data.data)
+            setLoadingKomentar(false)
+        }catch(err){
+            console.log('err', err)
+            setData(null)
+            setLoadingKomentar(false)
+        }
+    }
+
     // Komentar
     const onCancel=()=>{
         setModal(false)
