@@ -62,7 +62,7 @@ export default function Blogsbyid(){
             setLoadingKomentar(false)
         }catch(err){
             console.log('err', err)
-            setData(null)
+            setDataKomentar([])
             setLoadingKomentar(false)
         }
     }
