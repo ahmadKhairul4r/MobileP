@@ -22,12 +22,14 @@ export default function Blogsbyid(){
         nama:'',
         email:'',
         komentar:'',
+        blogId: params.id
     });
     const clearData = ()=>{
         setDataKomen({
             nama:'',
             email:'',
             komentar:'',
+            blogId: params.id
         })
     } 
     const inputHandler= (e) =>{
@@ -61,7 +63,7 @@ export default function Blogsbyid(){
         try{
             if (editorRef.current) {
                 const body = datakomen
-                body.content = editorRef.current.getContent();
+                body.komentar = editorRef.current.getContent();
 
                 let res = await fetch('/api/komenblog', {
                     method:'POST',
