@@ -14,29 +14,20 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
                     throw new Error('invalid request')
                 }
                 
-                if( body.nama == ""){
-                    throw new Error('nama is required')
+                if( body.balaskomen == ""){
+                    throw new Error('title is required')
                 }
 
-                if( body.email == ""){
-                    throw new Error('email is required')
-                }
-
-                if( body.komentar == ""){
-                    throw new Error('komentar is required')
-                }
-
-                let komenblog = await db.collection("komenblog").insertOne(body);
-                res.status(200).json({ data: komenblog, message:'data berhasil di simpan' });
+                let komenadmin = await db.collection("komenadmin").insertOne(body);
+                res.status(200).json({ data: komenadmin, message:'data berhasil di simpan' });
 
             }catch(err){
                 res.status(422).json({ message: err.message});
             }
             break;
-            
         default:
-            const blogsDataKomen = await db.collection("komenblog").find({}).toArray();
-            res.json({ data: blogsDataKomen });
+            const blogsDataBalasKomen = await db.collection("komenadmin").find({}).toArray();
+            res.json({ data: blogsDataBalasKomen });
         break;
     }
 }

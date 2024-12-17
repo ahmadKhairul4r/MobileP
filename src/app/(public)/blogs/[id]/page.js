@@ -9,6 +9,7 @@ import ConfigDialog from '../../../../components/ConfirmDialog'
 
 export default function Blogsbyid(){
     // Komentar
+    const [likedCommentId, setLikedCommentId] = useState(null);
     const editorRef = useRef(null);
     const [modal, setModal] = useState(false)
     const [modalTitle, setModalTitle] = useState("")
@@ -74,6 +75,10 @@ export default function Blogsbyid(){
         setModalMessage('')
         clearData()
     }
+    const toggleLike = (id) => {
+        setLikedCommentId(prev => (prev === id ? null : id)); // Jika sama, hilangkan like; jika berbeda, set ke id baru
+    };
+    
     // end Komentar
 
     async function onSubmitData() {
@@ -162,7 +167,6 @@ export default function Blogsbyid(){
                     }}
                 />
             </div>
-
             <button  className="btn-primary" onClick={onSubmitData}>
                 <span className="relative text-sm font-semibold text-white">
                     Kirim
@@ -170,11 +174,23 @@ export default function Blogsbyid(){
             </button>
         </Card>
         
+        {/* KOMENTAR */}
         {
-            dataKomentar.map( (komen,idx) => <Card className="mt-5" key={idx} title={komen.nama}>
-                <div  dangerouslySetInnerHTML={{ __html: komen.komentar }} />
-            </Card> )
-        }
+    dataKomentar.map((komen, idx) => (
+        <Card className="mt-5" key={idx} title={komen.nama}>
+            <div dangerouslySetInnerHTML={{ __html: komen.komentar }} />
+            <button 
+                onClick={() => toggleLike(komen.id)} 
+                className={`flex items-center mt-2 ${likedCommentId === komen.id ? 'text-red-500' : 'text-gray-500'}`}
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                </svg>
+                <span className="ml-1">{likedCommentId === komen.id ? 'Liked' : 'Like'}</span>
+            </button>
+        </Card>
+    ))
+}
         
 
         <ConfigDialog  

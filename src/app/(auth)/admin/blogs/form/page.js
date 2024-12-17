@@ -2,7 +2,7 @@
 import Card from '../../../../../components/card';
 import ConfigDialog from '../../../../../components/ConfirmDialog'
 import { useState } from 'react'
-import { useRef } from 'react';
+import { useEffect , useRef } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 
 export default function AdminBlogsForm() {
@@ -10,6 +10,7 @@ export default function AdminBlogsForm() {
     const [modal, setModal] = useState(false)
     const [modalTitle, setModalTitle] = useState("")
     const [modalMessage, setModalMessage] = useState("")
+    const [dataKomentar, setDataKomentar] = useState([])
     const [data, setData] = useState({
         title:'',
         subTitle:'',
@@ -61,7 +62,23 @@ export default function AdminBlogsForm() {
           setModalMessage(err.message)
         }
       }
+      const onFetchKomentar=async()=>{
+        try{
+            
+            let res = await fetch(`/api/komenblog/${params.id}`)
+            let data = await res.json()
+            setDataKomentar(data.data )
+            
+        }catch(err){
+            console.log('err', err)
+            setDataKomentar([])
+            
+        }
+    }
 
+    useEffect(()=>{
+        onFetchKomentar()
+    },[])
     return (
     <>
 
